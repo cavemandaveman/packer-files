@@ -1,0 +1,35 @@
+{
+    "variables": {
+        "user_pw": null
+    },
+    "builders": [{
+        "type": "virtualbox-iso",
+        "vm_name": "base-centos7-x86_64",
+        "guest_os_type": "RedHat_64",
+        "guest_additions_mode": "disable",
+        "virtualbox_version_file": "",
+        "headless": true,
+        "iso_urls": [
+            "../iso/CentOS-7-x86_64-Minimal-1708.iso",
+            "http://mirrors.ocf.berkeley.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1708.iso"
+        ],
+        "iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
+        "iso_checksum_type": "sha256",
+        "boot_wait": "10s",
+        "boot_command": [
+            "<esc><wait>",
+            "linux ks=https://gist.githubusercontent.com/cavemandaveman/3eec19420edd3011db119587eed91ae5/raw/ks.cfg",
+            "<enter><wait>"
+        ],
+        "ssh_username": "admin",
+        "ssh_password": "{{user `user_pw`}}",
+        "ssh_timeout": "1000s",
+        "disk_size": "20480",
+        "vboxmanage": [
+            ["modifyvm", "{{.Name}}", "--cpus", "2"],
+            ["modifyvm", "{{.Name}}", "--memory", "1024"],
+            ["modifyvm", "{{.Name}}", "--usb", "off"],
+            ["modifyvm", "{{.Name}}", "--audio", "none"]
+        ]
+    }]
+}
