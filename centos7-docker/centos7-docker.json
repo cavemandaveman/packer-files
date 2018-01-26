@@ -24,16 +24,15 @@
         "ssh_username": "admin",
         "ssh_password": "{{user `user_pw`}}",
         "ssh_timeout": "1000s",
+        "hard_drive_interface": "sata",
+        "disk_size": "20480",
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--cpus", "2"],
             ["modifyvm", "{{.Name}}", "--memory", "1024"],
             ["modifyvm", "{{.Name}}", "--usb", "off"],
             ["modifyvm", "{{.Name}}", "--audio", "none"],
-            ["storagectl", "{{.Name}}", "--name", "SATA", "--add", "sata", "--controller", "IntelAhci", "--portcount", "2", "--bootable", "on"],
-            ["createmedium", "--format", "VMDK", "--filename", "output-virtualbox-iso/system.vmdk", "--size", "20480"],
-            ["storageattach", "{{.Name}}", "--storagectl", "SATA", "--port", "0", "--device", "0", "--type", "hdd", "--medium", "output-virtualbox-iso/system.vmdk"],
             ["createmedium", "--format", "VMDK", "--filename", "output-virtualbox-iso/docker01.vmdk", "--size", "20480"],
-            ["storageattach", "{{.Name}}", "--storagectl", "SATA", "--port", "1", "--device", "0", "--type", "hdd", "--medium", "output-virtualbox-iso/docker01.vmdk"]
+            ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "1", "--device", "0", "--type", "hdd", "--medium", "output-virtualbox-iso/docker01.vmdk"]
         ]
     }]
 }
