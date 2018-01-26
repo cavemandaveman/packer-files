@@ -24,6 +24,7 @@
         "ssh_username": "admin",
         "ssh_password": "{{user `user_pw`}}",
         "ssh_timeout": "1000s",
+        "hard_drive_interface": "sata",
         "disk_size": "20480",
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--cpus", "2"],
