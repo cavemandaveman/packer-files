@@ -34,5 +34,11 @@
             ["createmedium", "--format", "VMDK", "--filename", "output-virtualbox-iso/docker01.vmdk", "--size", "20480"],
             ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "1", "--device", "0", "--type", "hdd", "--medium", "output-virtualbox-iso/docker01.vmdk"]
         ]
-    }]
+    }],
+    "provisioners": [
+        {
+          "type": "shell",
+          "inline": ["echo '{{user `user_pw`}}' | sudo -S yum install -y ansible"]
+        }
+    ]
 }
