@@ -38,7 +38,16 @@
     "provisioners": [
         {
           "type": "shell",
-          "inline": ["echo '{{user `user_pw`}}' | sudo -S yum install -y ansible"]
+          "inline": ["sudo yum install -y ansible"]
+        },
+        {
+          "type": "ansible-local",
+          "playbook_file": "ansible/main.yml",
+          "galaxy_file": "ansible/requirements.yml"
+        },
+        {
+            "type": "shell",
+            "inline": ["sudo yum autoremove -y ansible"]
         }
     ]
 }
